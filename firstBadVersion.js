@@ -1,14 +1,16 @@
 var solution = function(isBadVersion) {
     return function(n) {
-        var searchArea = [1, n];
-        var middle;
-        while(searchArea[1] - searchArea[0] >= 50){
-            middle = searchArea[0] + Math.floor((searchArea[1] - searchArea[0])/2);
-            if(isBadVersion(middle)) searchArea[1] = middle;
-            else searchArea[0] = middle;
+        var left = 1, right = n, middle;
+        
+        while(left <= right){
+            middle = Math.floor((left + right) / 2);
+            if(isBadVersion(middle) && !isBadVersion(middle - 1)){
+                return middle;
+            }else if(isBadVersion(middle)){
+                right = middle - 1;
+            }else{
+                left = middle + 1;
+            }
         }
-        for(var i = searchArea[0]; i <= searchArea[1]; i++){
-            if(isBadVersion(i)) return i;
-        } 
     };
 };

@@ -1,9 +1,10 @@
 var reverseString = function(s) {
-    var len = s.length;
-    var half = Math.floor(len / 2);
+    var left = 0;
+    var right = s.length - 1;
     
-    for (var i = 0; i < half; i++){
-       [ s[i], s[len - 1 - i] ] = [ s[len - 1 - i], s[i] ]
+    while(left <= right){
+        [s[left], s[right]] = [s[right], s[left]];
+        left++;
+        right--;
     }
-    return s;
 };
